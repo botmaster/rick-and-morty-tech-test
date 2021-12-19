@@ -1,11 +1,20 @@
 import axios from 'axios'
 
+/* const filtersTypes = {
+  NAME: 'name',
+  STATUS: 'status',
+  SPACIES: 'species',
+  TYPE: 'type',
+  GENDER: 'gender',
+  ALL: 'all',
+} */
+
 export default {
   namespaced: true,
   state: {
     characterList: [],
-    infos: null,
-    currentPage: 1,
+    info: null,
+    filter: null,
 
     isLoading: false,
     hasError: false,
@@ -15,9 +24,9 @@ export default {
       state.isLoading = true
       state.hasError = false
     },
-    RECIEVE_CHARACTER_LIST_SUCCESS(state, { results, infos }) {
+    RECIEVE_CHARACTER_LIST_SUCCESS(state, { results, info }) {
       state.characterList = results
-      state.infos = infos
+      state.info = Object.assign({}, info)
       state.isLoading = false
       state.hasError = false
     },
@@ -44,10 +53,13 @@ export default {
     },
   },
   actions: {
-    fetchCharacterList({ commit }, page = 1) {
+    fetchCharacterList({ commit }, payload) {
+      console.log('--->', payload)
       commit('REQUEST_CHARACTER_LIST')
       axios
-        .get(`https://rickandmortyapi.com/api/character/?page=${page}`)
+        .get('https://rickandmortyapi.com/api/character/', {
+          params: { ...payload },
+        })
         .then((response) => {
           commit('RECIEVE_CHARACTER_LIST_SUCCESS', response.data)
         })
@@ -69,7 +81,19 @@ export default {
           commit('RECIEVE_CHARACTER_FAILED', error)
         })
     },
+
+    /* fetchFilteredCharacterList({ commit }, { type, value }) {}, */
   },
-  getters: {},
+  getters: {
+    currentCharacter(state) {
+      return state.characterList[0]
+    },
+    characterCount(state) {
+      return state.info?.count
+    },
+    pageCount(state) {
+      return state.info?.pages
+    },
+  },
   modules: {},
 }
