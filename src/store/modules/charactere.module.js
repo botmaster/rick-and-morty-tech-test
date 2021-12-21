@@ -54,7 +54,6 @@ export default {
   },
   actions: {
     fetchCharacterList({ commit }, payload) {
-      console.log('--->', payload)
       commit('REQUEST_CHARACTER_LIST')
       axios
         .get('https://rickandmortyapi.com/api/character/', {

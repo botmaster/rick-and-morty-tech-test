@@ -5,16 +5,15 @@
   <!-- Search -->
   <form class="mt-6" @submit.prevent="searchSubmitHandler">
     <div role="search">
-      <label class="" for="search"
+      <label class="" for="input_search"
         >Search about a RM
         <p role="alert"></p>
       </label>
       <input
-        id="search"
-        ref="search"
+        id="input_search"
         class="rounded border py-2 px-2 text-sm"
         type="text"
-        :value="route.query.name"
+        v-model.lazy.trim="search"
       />
       <button type="submit" class="btn btn--ghost ml-4">Search</button>
     </div>
@@ -28,12 +27,11 @@
     </label>
     <select
       id="select_status"
-      ref="select_status"
       class="rounded border py-2 px-2 text-sm"
-      v-model="route.query.status"
-      @change="selectChangeHandler"
+      v-model="status"
     >
       <option disabled value="">Please select one</option>
+      <option>all</option>
       <option>alive</option>
       <option>dead</option>
       <option>unknown</option>
@@ -73,20 +71,53 @@
 import CardComponentVue from '../components/CardComponent.vue'
 
 import { useStore } from 'vuex'
-import { computed, watch, ref } from 'vue'
+import { computed, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 const store = useStore()
 const route = useRoute()
 const router = useRouter()
 
-if (!route.query.page) {
-  router.replace({ query: { page: 1 } })
-}
+const status = computed({
+  get() {
+    return route.query.status
+  },
+  set(newValue) {
+    if (newValue === 'all') {
+      const query = { ...route.query }
+      delete query.status
+      router.replace({
+        query: { ...query },
+      })
+    } else {
+      router.replace({
+        query: {
+          ...route.query,
+          status: newValue,
+        },
+      })
+    }
+  },
+})
+
+const search = computed({
+  get() {
+    return route.query.name
+  },
+  set(newValue) {
+    router.replace({
+      query: {
+        ...route.query,
+        name: newValue,
+      },
+    })
+  },
+})
 
 const queryPage = computed(() =>
   route.query.page ? Number(route.query.page) : 1
 )
+
 const characterCount = computed(
   () => store.getters['charactereModule/characterCount']
 )
@@ -94,33 +125,21 @@ const pageCount = computed(() => store.getters['charactereModule/pageCount'])
 const characterList = computed(() => store.state.charactereModule.characterList)
 const isLoading = computed(() => store.state.charactereModule.isLoading)
 
-const search = ref(null)
-const select_status = ref(null)
-
 const nextHandler = () => {
   router.push({
-    path: '/characters',
     query: Object.assign({ ...route.query }, { page: queryPage.value + 1 }),
   })
 }
 
 const prevHandler = () => {
   router.push({
-    path: '/characters',
     query: Object.assign({ ...route.query }, { page: queryPage.value - 1 }),
   })
 }
 
 const searchSubmitHandler = () => {
   router.push({
-    query: { name: search.value?.value?.trim(), page: 1 },
-  })
-}
-
-const selectChangeHandler = () => {
-  console.log(select_status.value, route.query.status)
-  router.push({
-    query: Object.assign({ ...route.query }, { status: route.query.status }),
+    query: { name: search.value, page: 1 },
   })
 }
 
@@ -135,9 +154,7 @@ watch(
   () => route.query,
   (query) => {
     console.log('watch route.query: ', query)
-    if (query) {
-      fetchData(query)
-    }
+    fetchData(query)
   },
   { immediate: true }
 )
