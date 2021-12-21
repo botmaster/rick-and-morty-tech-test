@@ -87,10 +87,12 @@ const status = computed({
       const query = { ...route.query }
       delete query.status
       router.replace({
+        name: 'characters',
         query: { ...query },
       })
     } else {
       router.replace({
+        name: 'characters',
         query: {
           ...route.query,
           status: newValue,
@@ -106,6 +108,7 @@ const search = computed({
   },
   set(newValue) {
     router.replace({
+      name: 'characters',
       query: {
         ...route.query,
         name: newValue,
@@ -127,18 +130,21 @@ const isLoading = computed(() => store.state.charactereModule.isLoading)
 
 const nextHandler = () => {
   router.push({
+    name: 'characters',
     query: Object.assign({ ...route.query }, { page: queryPage.value + 1 }),
   })
 }
 
 const prevHandler = () => {
   router.push({
+    name: 'characters',
     query: Object.assign({ ...route.query }, { page: queryPage.value - 1 }),
   })
 }
 
 const searchSubmitHandler = () => {
   router.push({
+    name: 'characters',
     query: { name: search.value, page: 1 },
   })
 }
@@ -153,8 +159,10 @@ const fetchData = (query) => {
 watch(
   () => route.query,
   (query) => {
-    console.log('watch route.query: ', query)
-    fetchData(query)
+    // this watcher is triggered whene the route name change. Dont know why. Need to dig in.
+    if (route.name === 'characters') {
+      fetchData(query)
+    }
   },
   { immediate: true }
 )
