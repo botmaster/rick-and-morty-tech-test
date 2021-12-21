@@ -24,7 +24,7 @@ const character = computed(
   () => store.getters['charactereModule/currentCharacter']
 )
 
-store.dispatch('charactereModule/fetchCharacterById', route.params.id)
+store.dispatch('charactereModule/fetchCharacterById', { id: route.params.id })
 </script>
 
 <style lang="scss" scoped></style>

@@ -53,11 +53,11 @@ export default {
     },
   },
   actions: {
-    fetchCharacterList({ commit }, payload) {
+    fetchCharacterList({ commit }, { name, status }) {
       commit('REQUEST_CHARACTER_LIST')
       axios
         .get('https://rickandmortyapi.com/api/character/', {
-          params: { ...payload },
+          params: { name, status },
         })
         .then((response) => {
           commit('RECIEVE_CHARACTER_LIST_SUCCESS', response.data)
@@ -68,7 +68,7 @@ export default {
         })
     },
 
-    fetchCharacterById({ commit }, id = 1) {
+    fetchCharacterById({ commit }, { id } = 1) {
       commit('REQUEST_CHARACTER')
       axios
         .get(`https://rickandmortyapi.com/api/character/${id}`)
@@ -80,8 +80,6 @@ export default {
           commit('RECIEVE_CHARACTER_FAILED', error)
         })
     },
-
-    /* fetchFilteredCharacterList({ commit }, { type, value }) {}, */
   },
   getters: {
     currentCharacter(state) {
