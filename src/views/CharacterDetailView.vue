@@ -1,6 +1,55 @@
 <template>
-  <div>Je suis la page détail</div>
-  <p v-if="character">{{ character.name }}</p>
+  <div class="container py-6 md:py-12">
+    <router-link to="/" class="btn btn--ghost mb-4 md:mb-12">Back</router-link>
+    <template v-if="character">
+      <div class="md:flex max-w-7xl">
+        <img
+          class="w-64 h-64 mx-auto rounded-full md:rounded-lg md:w-[300px] md:h-[300px] mb-12 md:mr-10 shadow shadow-green-800/20"
+          width="300"
+          height="300"
+          :src="character.image"
+          :alt="`Name: ${character.name}`"
+        />
+        <div class="flex-grow text-lg">
+          <h2>{{ character.name }}</h2>
+          <div class="columns-3xs mt-6">
+            <div class="col-item">
+              <p class="label">Created</p>
+              <p>{{ created }}&nbsp;</p>
+            </div>
+            <div class="col-item">
+              <p class="label">Status</p>
+              <p>{{ character.status }}&nbsp;</p>
+            </div>
+            <div class="col-item">
+              <p class="label">Species</p>
+              <p>{{ character.species }}&nbsp;</p>
+            </div>
+            <div class="col-item">
+              <p class="label">Type</p>
+              <p>{{ formatValue(character.type) }}&nbsp;</p>
+            </div>
+            <div class="col-item">
+              <p class="label">Gender</p>
+              <p>{{ character.gender }}&nbsp;</p>
+            </div>
+            <div class="col-item">
+              <p class="label">Origin</p>
+              <p>{{ character.origin?.name }}&nbsp;</p>
+            </div>
+            <div class="col-item">
+              <p class="label">location</p>
+              <p>{{ character.location?.name }}&nbsp;</p>
+            </div>
+            <div class="col-item">
+              <p class="label">Episodes</p>
+              <p>{{ episodesCount }}&nbsp;</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </template>
+  </div>
 </template>
 
 <script setup>
@@ -12,19 +61,28 @@ const store = useStore()
 const route = useRoute()
 
 // eslint-disable-next-line no-unused-vars
-// const props = defineProps({
-//   id: {
-//     type: String,
-//     required: true,
-//   },
-// })
-
-// eslint-disable-next-line no-unused-vars
 const character = computed(
   () => store.getters['charactereModule/currentCharacter']
 )
+const episodesCount = computed(() => character.value?.episode?.length)
+const created = computed(() => {
+  return new Date(character.value.created)?.toLocaleDateString('fe-FE')
+})
+
+const formatValue = (value) => {
+  const str = String(value).trim()
+  return str || str !== '' ? value : 'NA'
+}
 
 store.dispatch('charactereModule/fetchCharacterById', { id: route.params.id })
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.label {
+  @apply text-sm text-turquoise-800;
+}
+
+.col-item {
+  @apply break-inside-avoid-column mb-2;
+}
+</style>

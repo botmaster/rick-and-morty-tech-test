@@ -1,11 +1,11 @@
 <template>
-  <div class="rounded overflow-hidden shadow-lg">
+  <div class="rounded overflow-hidden bg-white shadow shadow-green-800/20">
     <a href="#" @click.prevent="goto"
       ><img class="w-full" :src="image" :alt="`Name: ${name}`"
     /></a>
 
-    <div class="px-6 py-4">
-      <div class="text-xl mb-2">{{ name }}</div>
+    <div class="flex justify-between items-baseline px-4 py-2">
+      <p class="text-lg">{{ name }} <span v-if="status === 'Dead'">☠️</span></p>
       <p>
         <a href="#" @click.prevent="goto">Details</a>
       </p>
@@ -30,6 +30,10 @@ const props = defineProps({
     required: true,
   },
   image: {
+    type: String,
+    default: '',
+  },
+  status: {
     type: String,
     default: '',
   },

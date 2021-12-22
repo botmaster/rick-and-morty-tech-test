@@ -2,22 +2,22 @@
   text-decoration: none;
   @apply font-body text-sm py-2 px-4 rounded text-center inline-flex;
 
-  &--black {
-    @apply bg-black text-white border border-black;
+  &--primary {
+    @apply border border-green bg-green/50;
     // @apply bg-transparent text-black border border-black;
     transition: background-color 0.4s, border-color 0.4s;
 
     &:hover {
-      @apply bg-transparent border border-black;
+      @apply bg-green border border-green;
     }
   }
 
   &--ghost {
-    @apply bg-transparent text-frost-nord-10 dark:text-current border border-frost-nord-8;
+    @apply bg-transparent border border-green;
     transition: color 0.4s, border-color 0.4s;
 
     &:hover {
-      @apply text-polarnight-nord-2 border-polarnight-nord-2 dark:text-snowstorm-nord-4 dark:border-snowstorm-nord-4;
+      @apply bg-green/20;
     }
   }
 
