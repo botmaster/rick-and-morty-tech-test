@@ -32,11 +32,23 @@
       <!-- Paginate -->
       <div class="">
         <div class="flex flex-wrap space-x-2 md:space-x-4 items-center">
-          <button class="btn btn--ghost" @click="prevHandler">
+          <button
+            :class="hasPrevPage ? '' : 'btn--disabled'"
+            :disabled="!hasPrevPage"
+            class="btn btn--ghost"
+            @click="prevHandler"
+          >
             Previous page
           </button>
           <p class="text-sm">{{ queryPage }} / {{ pageCount }}</p>
-          <button class="btn btn--ghost" @click="nextHandler">Next page</button>
+          <button
+            :class="hasNextPage ? '' : 'btn--disabled'"
+            :disabled="!hasNextPage"
+            class="btn btn--ghost"
+            @click="nextHandler"
+          >
+            Next page
+          </button>
           <p class="text-sm">Caracters: {{ characterCount }}</p>
         </div>
       </div>
@@ -153,6 +165,12 @@ const characterCount = computed(
   () => store.getters['charactereModule/characterCount']
 )
 const pageCount = computed(() => store.getters['charactereModule/pageCount'])
+const hasNextPage = computed(
+  () => store.getters['charactereModule/hasNextPage']
+)
+const hasPrevPage = computed(
+  () => store.getters['charactereModule/hasPrevPage']
+)
 const characterList = computed(() => store.state.charactereModule.characterList)
 const isLoading = computed(() => store.state.charactereModule.isLoading)
 

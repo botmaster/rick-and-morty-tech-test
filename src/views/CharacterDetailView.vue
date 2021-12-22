@@ -1,6 +1,11 @@
 <template>
   <div class="container py-6 md:py-12">
-    <router-link to="/" class="btn btn--ghost mb-4 md:mb-12">Back</router-link>
+    <a
+      href=""
+      @click.prevent="router.go(-1)"
+      class="btn btn--ghost mb-4 md:mb-12"
+      >Back</a
+    >
     <template v-if="character">
       <div class="md:flex max-w-7xl">
         <img
@@ -55,10 +60,11 @@
 <script setup>
 import { useStore } from 'vuex'
 import { computed } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 
 const store = useStore()
 const route = useRoute()
+const router = useRouter()
 
 // eslint-disable-next-line no-unused-vars
 const character = computed(

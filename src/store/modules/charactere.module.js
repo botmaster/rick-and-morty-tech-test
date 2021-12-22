@@ -91,6 +91,12 @@ export default {
     pageCount(state) {
       return state.info?.pages
     },
+    hasNextPage(state) {
+      return state.info?.next
+    },
+    hasPrevPage(state) {
+      return state.info?.prev
+    },
   },
   modules: {},
 }
