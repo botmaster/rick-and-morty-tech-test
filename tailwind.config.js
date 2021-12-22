@@ -3,7 +3,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        display: ['Rubik', 'sans-serif'],
+        display: ['wubba_regular', 'sans-serif'],
         body: ['Rubik', 'sans-serif'],
       },
       colors: {
@@ -39,6 +39,16 @@ module.exports = {
           'nord-14': '#A3BE8C',
           'nord-15': '#B48EAD',
         },
+      },
+    },
+    container: {
+      center: true,
+      padding: {
+        DEFAULT: '1rem',
+        sm: '2rem',
+        lg: '4rem',
+        xl: '5rem',
+        '2xl': '6rem',
       },
     },
   },
