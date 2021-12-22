@@ -1,6 +1,12 @@
 <template>
   <the-header></the-header>
-  <cover-component-vue></cover-component-vue>
+  <cover-component-vue title="Jellysmack Tech Test">
+    <img
+      class="inline-block mb-6"
+      src="@/assets/images/Rick_and_Morty_logo.png"
+      alt="Logo Rick and Morty"
+    />
+  </cover-component-vue>
   <main class="flex-grow">
     <router-view />
   </main>

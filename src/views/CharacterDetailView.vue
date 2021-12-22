@@ -1,10 +1,10 @@
 <template>
-  <div class="container mx-auto">
-    <router-link to="/" class="btn btn--ghost">Back</router-link>
+  <div class="container py-6 md:py-12">
+    <router-link to="/" class="btn btn--ghost mb-4 md:mb-12">Back</router-link>
     <template v-if="character">
       <div class="md:flex max-w-7xl">
         <img
-          class="w-64 h-64 mx-auto rounded-full md:rounded-lg md:w-[300px] md:h-[300px] mb-12 md:mr-10 bg-indigo-500 shadow-2xl shadow-indigo-500/30"
+          class="w-64 h-64 mx-auto rounded-full md:rounded-lg md:w-[300px] md:h-[300px] mb-12 md:mr-10 shadow shadow-green-800/20"
           width="300"
           height="300"
           :src="character.image"
@@ -79,7 +79,7 @@ store.dispatch('charactereModule/fetchCharacterById', { id: route.params.id })
 
 <style lang="scss" scoped>
 .label {
-  @apply text-sm text-gray-500;
+  @apply text-sm text-turquoise-800;
 }
 
 .col-item {

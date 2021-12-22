@@ -3,8 +3,9 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        display: ['wubba_regular', 'sans-serif'],
+        display: ['Rubik', 'sans-serif'],
         body: ['Rubik', 'sans-serif'],
+        wubba: ['wubba_regular', 'sans-serif'],
       },
       colors: {
         transparent: 'transparent',
@@ -14,6 +15,30 @@ module.exports = {
         body: {
           background: '#f2f4f8',
           backgrounddark: '#2E3440',
+        },
+        brown: {
+          DEFAULT: '#44281d',
+        },
+        salmon: {
+          DEFAULT: '#e4a788',
+        },
+        yellow: {
+          DEFAULT: '#f0e14a',
+        },
+        green: {
+          100: '#f5faed',
+          200: '##eaf5db',
+          DEFAULT: '#97ce4c',
+          700: '#79a53d',
+          900: '#0f1508',
+        },
+        pink: {
+          DEFAULT: '#e89ac7',
+        },
+        turquoise: {
+          DEFAULT: '#00b0c8',
+          800: '#004650',
+          900: '#002328',
         },
         polarnight: {
           'nord-0': '#2E3440',

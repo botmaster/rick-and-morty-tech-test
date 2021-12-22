@@ -2,3 +2,17 @@ html,
 body {
   height: 100%;
 }
+
+body {
+  @apply bg-green-100;
+}
+
+// Links
+a:not(.btn) {
+  @apply text-pink underline decoration-pink-100;
+
+  &:hover,
+  &:focus {
+    @apply text-pink decoration-pink;
+  }
+}
