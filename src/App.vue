@@ -1,6 +1,7 @@
 <template>
   <the-header></the-header>
-  <main class="container mx-auto flex-grow">
+  <cover-component-vue></cover-component-vue>
+  <main class="flex-grow">
     <router-view />
   </main>
   <the-footer></the-footer>
@@ -9,6 +10,7 @@
 <script setup>
 import TheHeader from './components/TheHeader.vue'
 import TheFooter from './components/TheFooter.vue'
+import CoverComponentVue from './components/CoverComponent.vue'
 </script>
 
 <style lang="scss"></style>

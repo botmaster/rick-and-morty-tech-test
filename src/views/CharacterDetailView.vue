@@ -1,26 +1,55 @@
 <template>
-  <div>Je suis la page détail</div>
-  <template v-if="character">
-    <h2>{{ character.name }}</h2>
-    <img :src="character.image" :alt="`Name: ${character.name}`" />
-
-    <p>Created:</p>
-    <p>{{ created }}</p>
-    <p>Status:</p>
-    <p>{{ character.status }}</p>
-    <p>Species:</p>
-    <p>{{ character.species }}</p>
-    <p>Type:</p>
-    <p>{{ character.type }}</p>
-    <p>Gender:</p>
-    <p>{{ character.gender }}</p>
-    <p>Origin:</p>
-    <p>{{ character.origin?.name }}</p>
-    <p>location:</p>
-    <p>{{ character.location?.name }}</p>
-    <p>Episodes:</p>
-    <p>{{ episodesCount }}</p>
-  </template>
+  <div class="container mx-auto">
+    <router-link to="/" class="btn btn--ghost">Back</router-link>
+    <template v-if="character">
+      <div class="md:flex max-w-7xl">
+        <img
+          class="w-64 h-64 mx-auto rounded-full md:rounded-lg md:w-[300px] md:h-[300px] mb-12 md:mr-10 bg-indigo-500 shadow-2xl shadow-indigo-500/30"
+          width="300"
+          height="300"
+          :src="character.image"
+          :alt="`Name: ${character.name}`"
+        />
+        <div class="flex-grow text-lg">
+          <h2>{{ character.name }}</h2>
+          <div class="columns-3xs mt-6">
+            <div class="col-item">
+              <p class="label">Created</p>
+              <p>{{ created }}&nbsp;</p>
+            </div>
+            <div class="col-item">
+              <p class="label">Status</p>
+              <p>{{ character.status }}&nbsp;</p>
+            </div>
+            <div class="col-item">
+              <p class="label">Species</p>
+              <p>{{ character.species }}&nbsp;</p>
+            </div>
+            <div class="col-item">
+              <p class="label">Type</p>
+              <p>{{ formatValue(character.type) }}&nbsp;</p>
+            </div>
+            <div class="col-item">
+              <p class="label">Gender</p>
+              <p>{{ character.gender }}&nbsp;</p>
+            </div>
+            <div class="col-item">
+              <p class="label">Origin</p>
+              <p>{{ character.origin?.name }}&nbsp;</p>
+            </div>
+            <div class="col-item">
+              <p class="label">location</p>
+              <p>{{ character.location?.name }}&nbsp;</p>
+            </div>
+            <div class="col-item">
+              <p class="label">Episodes</p>
+              <p>{{ episodesCount }}&nbsp;</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </template>
+  </div>
 </template>
 
 <script setup>
@@ -40,7 +69,20 @@ const created = computed(() => {
   return new Date(character.value.created)?.toLocaleDateString('fe-FE')
 })
 
+const formatValue = (value) => {
+  const str = String(value).trim()
+  return str || str !== '' ? value : 'NA'
+}
+
 store.dispatch('charactereModule/fetchCharacterById', { id: route.params.id })
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.label {
+  @apply text-sm text-gray-500;
+}
+
+.col-item {
+  @apply break-inside-avoid-column mb-2;
+}
+</style>
