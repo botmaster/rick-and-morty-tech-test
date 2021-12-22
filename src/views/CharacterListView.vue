@@ -110,7 +110,7 @@ const status = computed({
   },
   set(newValue) {
     if (newValue === 'all') {
-      const query = { ...route.query }
+      const query = { ...route.query, page: 1 }
       delete query.status
       router.replace({
         name: 'characters',
@@ -122,6 +122,7 @@ const status = computed({
         query: {
           ...route.query,
           status: newValue,
+          page: 1,
         },
       })
     }
@@ -138,6 +139,7 @@ const search = computed({
       query: {
         ...route.query,
         name: newValue,
+        page: 1,
       },
     })
   },
