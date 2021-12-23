@@ -12,7 +12,9 @@
       /></router-link>
       <ul class="space-x-4 flex z-10">
         <li>
-          <router-link class="bg-black/20 px-4 py-2 rounded-lg" to="/about"
+          <router-link
+            class="bg-black/20 px-4 py-2 rounded-lg !no-underline"
+            to="/about"
             >About</router-link
           >
         </li>

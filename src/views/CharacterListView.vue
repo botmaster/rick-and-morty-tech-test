@@ -26,7 +26,7 @@
     </form>
 
     <div
-      v-if="characterList && characterList.length > 0"
+      v-if="characterList && characterList.length"
       class="md:flex justify-between mt-14"
     >
       <!-- Paginate -->
