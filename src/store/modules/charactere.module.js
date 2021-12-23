@@ -4,6 +4,7 @@ export default {
   namespaced: true,
   state: {
     characterList: [],
+    activeCharacter: null,
     info: null,
     filter: null,
 
@@ -18,27 +19,29 @@ export default {
     RECIEVE_CHARACTER_LIST_SUCCESS(state, { results, info }) {
       state.characterList = [...results]
       state.info = Object.assign({}, info)
+      state.activeCharacter = null
       state.isLoading = false
       state.hasError = false
     },
     RECIEVE_CHARACTER_LIST_FAILED(state, error) {
       state.characterList = []
+      state.activeCharacter = null
       state.info = null
       state.isLoading = false
       state.hasError = error
     },
+
     REQUEST_CHARACTER(state) {
       state.isLoading = true
       state.hasError = false
     },
     RECIEVE_CHARACTER_SUCCESS(state, character) {
-      state.characterList = [character]
+      state.activeCharacter = Object.assign({}, character)
       state.isLoading = false
       state.hasError = false
     },
     RECIEVE_CHARACTER_FAILED(state, error) {
-      state.characterList = []
-      state.info = null
+      state.activeCharacter = null
       state.isLoading = false
       state.hasError = error
     },
@@ -74,7 +77,7 @@ export default {
   },
   getters: {
     currentCharacter(state) {
-      return state.characterList[0]
+      return state.activeCharacter
     },
     characterCount(state) {
       return state.info?.count
