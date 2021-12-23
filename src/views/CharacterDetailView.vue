@@ -1,14 +1,16 @@
 <template>
   <div class="container py-6 md:py-12">
-    <a
-      href=""
-      @click.prevent="router.go(-1)"
-      class="btn btn--ghost mb-4 md:mb-12"
-      >Back</a
-    >
-    <template v-if="character">
+    <div class="mb-4 md:mb-12 flex items-center">
+      <a href="" @click.prevent="router.go(-1)" class="btn btn--ghost">Back</a>
+      <loading-component
+        class="ml-6 text-4xl"
+        v-if="isLoading"
+      ></loading-component>
+    </div>
+    <template v-if="character && !isLoading">
       <div class="md:flex max-w-7xl">
         <img
+          v-show="character?.image"
           class="w-64 h-64 mx-auto rounded-full md:rounded-lg md:w-[300px] md:h-[300px] mb-12 md:mr-10 shadow shadow-green-800/20"
           width="300"
           height="300"
@@ -58,6 +60,8 @@
 </template>
 
 <script setup>
+import LoadingComponent from '../components/LoadingComponent.vue'
+
 import { useStore } from 'vuex'
 import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
@@ -74,6 +78,7 @@ const episodesCount = computed(() => character.value?.episode?.length)
 const created = computed(() => {
   return new Date(character.value.created)?.toLocaleDateString('fe-FE')
 })
+const isLoading = computed(() => store.state.charactereModule.isLoading)
 
 const formatValue = (value) => {
   const str = String(value).trim()

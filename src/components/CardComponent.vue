@@ -1,7 +1,16 @@
 <template>
   <div class="rounded overflow-hidden bg-white shadow shadow-green-800/20">
-    <a href="#" @click.prevent="goto"
-      ><img class="w-full" :src="image" :alt="`Name: ${name}`"
+    <a
+      href="#"
+      @click.prevent="goto"
+      class="w-full aspect-square relative flex items-center justify-center"
+      ><loading-component></loading-component>
+      <img
+        width="300"
+        height="300"
+        class="absolute inset-0 w-full h-full object-cover"
+        :src="image"
+        :alt="`Name: ${name}`"
     /></a>
 
     <div class="flex justify-between items-baseline px-4 py-2">
@@ -14,6 +23,8 @@
 </template>
 
 <script setup>
+import LoadingComponent from './LoadingComponent.vue'
+
 import { defineProps } from 'vue'
 import { useRouter } from 'vue-router'
 

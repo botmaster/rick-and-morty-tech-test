@@ -75,10 +75,10 @@
 
     <!-- List -->
     <ul
-      v-if="characterList && characterList.length > 0"
+      v-if="characterList && characterList.length"
       class="mt-8 grid gap-4 md:gap-8 grid-cols-2 md:grid-cols-3 xl:grid-cols-4"
     >
-      <li v-for="(item, index) in characterList" :key="index">
+      <li class="item" v-for="item in characterList" :key="item.id">
         <card-component
           :name="item.name"
           :id="item.id"
