@@ -34,6 +34,7 @@ module.exports = {
         },
         pink: {
           DEFAULT: '#e89ac7',
+          700: '#ae7495',
         },
         turquoise: {
           DEFAULT: '#00b0c8',

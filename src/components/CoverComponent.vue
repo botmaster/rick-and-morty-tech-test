@@ -28,7 +28,7 @@ defineProps({
   height: 40vh;
 
   &__title {
-    @apply text-2xl text-white/60;
+    @apply text-2xl text-green;
     /* text-shadow: 0 0 1px rgb(7, 31, 1), 0 0 2px rgb(7, 31, 1),
       0 0 3px rgb(7, 31, 1), 0 0 4px rgb(7, 31, 1), 0 0 5px rgb(7, 31, 1),
       0 0 15px #b6ff00; */

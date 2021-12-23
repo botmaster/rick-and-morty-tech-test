@@ -53,11 +53,11 @@ export default {
     },
   },
   actions: {
-    fetchCharacterList({ commit }, { name, status }) {
+    fetchCharacterList({ commit }, { name, status, page }) {
       commit('REQUEST_CHARACTER_LIST')
       axios
         .get('https://rickandmortyapi.com/api/character/', {
-          params: { name, status },
+          params: { name, status, page },
         })
         .then((response) => {
           commit('RECIEVE_CHARACTER_LIST_SUCCESS', response.data)
@@ -90,6 +90,12 @@ export default {
     },
     pageCount(state) {
       return state.info?.pages
+    },
+    hasNextPage(state) {
+      return state.info?.next
+    },
+    hasPrevPage(state) {
+      return state.info?.prev
     },
   },
   modules: {},
