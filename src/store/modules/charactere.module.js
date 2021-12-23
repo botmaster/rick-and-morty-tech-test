@@ -12,7 +12,7 @@ import axios from 'axios'
 export default {
   namespaced: true,
   state: {
-    characterList: [],
+    characterList: null,
     info: null,
     filter: null,
 
@@ -25,7 +25,7 @@ export default {
       state.hasError = false
     },
     RECIEVE_CHARACTER_LIST_SUCCESS(state, { results, info }) {
-      state.characterList = results
+      state.characterList = [...results]
       state.info = Object.assign({}, info)
       state.isLoading = false
       state.hasError = false

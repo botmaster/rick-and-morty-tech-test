@@ -82,7 +82,7 @@ const isLoading = computed(() => store.state.charactereModule.isLoading)
 
 const formatValue = (value) => {
   const str = String(value).trim()
-  return str || str !== '' ? value : 'NA'
+  return str || str !== '' ? value : 'Na'
 }
 
 store.dispatch('charactereModule/fetchCharacterById', { id: route.params.id })

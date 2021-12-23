@@ -75,7 +75,7 @@
 
     <!-- List -->
     <ul
-      v-if="characterList && characterList.length"
+      v-if="characterList?.length > 0"
       class="mt-8 grid gap-4 md:gap-8 grid-cols-2 md:grid-cols-3 xl:grid-cols-4"
     >
       <li class="item" v-for="item in characterList" :key="item.id">
@@ -88,7 +88,8 @@
         ></card-component>
       </li>
     </ul>
-    <p v-else>Pas de résultats</p>
+    <p v-else-if="characterList?.length === 0">Pas de résultats</p>
+    <p v-else><span>???</span></p>
 
     <!-- Paginate -->
     <div v-if="characterList && characterList.length > 0" class="mt-4">
