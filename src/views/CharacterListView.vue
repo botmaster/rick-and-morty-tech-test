@@ -29,30 +29,19 @@
       v-if="characterList && characterList.length"
       class="md:flex justify-between mt-14"
     >
-      <!-- Paginate -->
-      <div class="">
-        <div class="flex flex-wrap space-x-2 md:space-x-4 items-center">
-          <button
-            :class="hasPrevPage ? '' : 'btn--disabled'"
-            :disabled="!hasPrevPage"
-            class="btn btn--ghost"
-            @click="prevHandler"
-          >
-            Previous page
-          </button>
-          <p class="text-sm">{{ queryPage }} / {{ pageCount }}</p>
-          <button
-            :class="hasNextPage ? '' : 'btn--disabled'"
-            :disabled="!hasNextPage"
-            class="btn btn--ghost"
-            @click="nextHandler"
-          >
-            Next page
-          </button>
-          <p class="text-sm">Caracters: {{ characterCount }}</p>
-        </div>
+      <!-- Paginate + infos -->
+      <div class="flex flex-wrap items-baseline">
+        <paginate-component
+          :page-count="pageCount"
+          :has-next-page="hasNextPage ? true : false"
+          :has-prev-page="hasPrevPage ? true : false"
+          :current-page="queryPage"
+          @prev="prevHandler"
+          @next="nextHandler"
+          class="mr-4"
+        ></paginate-component>
+        <span class="text-sm">Caracters: {{ characterCount }}</span>
       </div>
-
       <!-- Filters -->
       <div class="flex items-baseline">
         <label class="block mr-2" for="select_status"
@@ -76,7 +65,7 @@
     <!-- List -->
     <ul
       v-if="characterList?.length > 0"
-      class="mt-8 grid gap-4 md:gap-8 grid-cols-2 md:grid-cols-3 xl:grid-cols-4"
+      class="my-4 md:my-8 grid gap-4 md:gap-8 grid-cols-2 md:grid-cols-3 xl:grid-cols-4"
     >
       <li class="item" v-for="item in characterList" :key="item.id">
         <card-component
@@ -91,23 +80,21 @@
     <p v-else-if="characterList?.length === 0">Pas de résultats</p>
     <p v-else><span>???</span></p>
 
-    <!-- Paginate -->
-    <div v-if="characterList && characterList.length > 0" class="mt-4">
-      <div class="flex space-x-4 items-center">
-        <button class="btn btn--ghost" @click="prevHandler">
-          Previous page
-        </button>
-        <p class="text-sm">{{ queryPage }} / {{ pageCount }}</p>
-        <button class="btn btn--ghost" @click="nextHandler">Next page</button>
-        <p class="text-sm">Caracters: {{ characterCount }}</p>
-      </div>
-    </div>
+    <paginate-component
+      :page-count="pageCount"
+      :has-next-page="hasNextPage ? true : false"
+      :has-prev-page="hasPrevPage ? true : false"
+      :current-page="queryPage"
+      @prev="prevHandler"
+      @next="nextHandler"
+    ></paginate-component>
   </div>
 </template>
 
 <script setup>
 import CardComponent from '../components/CardComponent.vue'
 import LoadingComponent from '../components/LoadingComponent.vue'
+import PaginateComponent from '../components/PaginateComponent.vue'
 
 import { useStore } from 'vuex'
 import { computed, watch } from 'vue'
