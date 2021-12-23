@@ -1,18 +1,9 @@
 import axios from 'axios'
 
-/* const filtersTypes = {
-  NAME: 'name',
-  STATUS: 'status',
-  SPACIES: 'species',
-  TYPE: 'type',
-  GENDER: 'gender',
-  ALL: 'all',
-} */
-
 export default {
   namespaced: true,
   state: {
-    characterList: null,
+    characterList: [],
     info: null,
     filter: null,
 
@@ -53,11 +44,11 @@ export default {
     },
   },
   actions: {
-    fetchCharacterList({ commit }, { name, status, page }) {
+    fetchCharacterList({ commit }, { page, name, status }) {
       commit('REQUEST_CHARACTER_LIST')
       axios
         .get('https://rickandmortyapi.com/api/character/', {
-          params: { name, status, page },
+          params: { page, name, status },
         })
         .then((response) => {
           commit('RECIEVE_CHARACTER_LIST_SUCCESS', response.data)

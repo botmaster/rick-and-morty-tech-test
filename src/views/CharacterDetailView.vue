@@ -1,7 +1,7 @@
 <template>
   <div class="container py-6 md:py-12">
     <div class="mb-4 md:mb-12 flex items-center">
-      <a href="" @click.prevent="router.go(-1)" class="btn btn--ghost">Back</a>
+      <a href="#" @click.prevent="router.go(-1)" class="btn btn--ghost">Back</a>
       <loading-component
         class="ml-6 text-4xl"
         v-if="isLoading"
@@ -34,7 +34,7 @@
             </div>
             <div class="col-item">
               <p class="label">Type</p>
-              <p>{{ formatValue(character.type) }}&nbsp;</p>
+              <p>{{ formatValue(character?.type) }}&nbsp;</p>
             </div>
             <div class="col-item">
               <p class="label">Gender</p>
@@ -64,7 +64,7 @@ import LoadingComponent from '../components/LoadingComponent.vue'
 
 import { useStore } from 'vuex'
 import { computed } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 
 const store = useStore()
 const route = useRoute()
@@ -74,9 +74,9 @@ const router = useRouter()
 const character = computed(
   () => store.getters['charactereModule/currentCharacter']
 )
-const episodesCount = computed(() => character.value?.episode?.length)
+const episodesCount = computed(() => character?.value?.episode?.length || 'Na')
 const created = computed(() => {
-  return new Date(character.value.created)?.toLocaleDateString('fe-FE')
+  return new Date(character?.value.created)?.toLocaleDateString('fe-FE') || 'Na'
 })
 const isLoading = computed(() => store.state.charactereModule.isLoading)
 
