@@ -9,7 +9,7 @@
     />
     <div class="relative container mx-auto text-center">
       <slot></slot>
-      <p class="cover__title h1">{{ title }}</p>
+      <p v-if="title" class="cover__title h1">{{ title }}</p>
     </div>
   </div>
 </template>
@@ -18,7 +18,7 @@
 defineProps({
   title: {
     type: String,
-    required: true,
+    default: null,
   },
 })
 </script>

@@ -1,6 +1,6 @@
 <template>
   <the-header></the-header>
-  <cover-component-vue title="Jellysmack Tech Test">
+  <cover-component-vue>
     <img
       class="inline-block mb-6"
       src="@/assets/images/Rick_and_Morty_logo.png"

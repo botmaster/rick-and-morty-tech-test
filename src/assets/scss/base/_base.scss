@@ -9,7 +9,7 @@ body {
 
 // Links
 a:not(.btn) {
-  @apply text-pink-700 underline decoration-pink;
+  @apply text-green-700 underline decoration-green;
 
   &:hover,
   &:focus {

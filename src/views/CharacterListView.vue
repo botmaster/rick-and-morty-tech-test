@@ -13,11 +13,10 @@
       <div role="search">
         <label class="block text-xl mb-2" for="input_search"
           >Search about a Ricky and Morty character
-          <p role="alert"></p>
         </label>
         <input
           id="input_search"
-          class="rounded border py-2 px-2 text-sm"
+          class="rounded border py-2 px-2 text-sm md:w-64"
           type="text"
           v-model.lazy.trim="search"
         />
@@ -27,7 +26,7 @@
 
     <div
       v-if="characterList && characterList.length"
-      class="md:flex justify-between mt-14"
+      class="md:flex justify-between mt-6 md:mt-14"
     >
       <!-- Paginate + infos -->
       <div class="flex flex-wrap items-baseline">
@@ -40,10 +39,13 @@
           @next="nextHandler"
           class="mr-4"
         ></paginate-component>
-        <span class="text-sm">Caracters: {{ characterCount }}</span>
+        <span class="text-sm mt-2 md:mt-0"
+          >Caracters: {{ characterCount }}</span
+        >
       </div>
+
       <!-- Filters -->
-      <div class="flex items-baseline">
+      <div class="mt-6 md:mt-0 flex items-baseline">
         <label class="block mr-2" for="select_status"
           >Filter by status
           <p role="alert"></p>
@@ -77,10 +79,24 @@
         ></card-component>
       </li>
     </ul>
-    <p v-else-if="characterList?.length === 0">Pas de résultats</p>
-    <p v-else><span>???</span></p>
+    <div
+      v-else-if="characterList?.length === 0"
+      class="my-4 md:my-8 md:flex md:items-center"
+    >
+      <img
+        class="w-full mt-6 md:w-1/2 md:mr-8 md:mt-0"
+        src="@/assets/images/what.png"
+        alt=""
+      />
+      <p class="mt-4 flex-grow md:text-5xl md:mt-0">
+        There are no results for your search !
+      </p>
+    </div>
+    <p v-else><span>You shouldn't see this 😱</span></p>
 
+    <!-- Paginate -->
     <paginate-component
+      v-if="characterList && characterList.length"
       :page-count="pageCount"
       :has-next-page="hasNextPage ? true : false"
       :has-prev-page="hasPrevPage ? true : false"
@@ -106,7 +122,7 @@ const router = useRouter()
 
 const status = computed({
   get() {
-    return route.query.status
+    return route.query.status || 'all'
   },
   set(newValue) {
     if (newValue === 'all') {
