@@ -1,5 +1,5 @@
 <template>
-  <span class="loader loader--style1" title="loader">
+  <span class="loader loader--style1">
     <svg
       class="inline-block"
       xmlns="http://www.w3.org/2000/svg"

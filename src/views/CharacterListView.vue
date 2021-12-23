@@ -13,11 +13,10 @@
       <div role="search">
         <label class="block text-xl mb-2" for="input_search"
           >Search about a Ricky and Morty character
-          <p role="alert"></p>
         </label>
         <input
           id="input_search"
-          class="rounded border py-2 px-2 text-sm"
+          class="rounded border py-2 px-2 text-sm md:w-64"
           type="text"
           v-model.lazy.trim="search"
         />
@@ -27,34 +26,26 @@
 
     <div
       v-if="characterList && characterList.length"
-      class="md:flex justify-between mt-14"
+      class="md:flex justify-between mt-6 md:mt-14"
     >
-      <!-- Paginate -->
-      <div class="">
-        <div class="flex flex-wrap space-x-2 md:space-x-4 items-center">
-          <button
-            :class="hasPrevPage ? '' : 'btn--disabled'"
-            :disabled="!hasPrevPage"
-            class="btn btn--ghost"
-            @click="prevHandler"
-          >
-            Previous page
-          </button>
-          <p class="text-sm">{{ queryPage }} / {{ pageCount }}</p>
-          <button
-            :class="hasNextPage ? '' : 'btn--disabled'"
-            :disabled="!hasNextPage"
-            class="btn btn--ghost"
-            @click="nextHandler"
-          >
-            Next page
-          </button>
-          <p class="text-sm">Caracters: {{ characterCount }}</p>
-        </div>
+      <!-- Paginate + infos -->
+      <div class="flex flex-wrap items-baseline">
+        <paginate-component
+          :page-count="pageCount"
+          :has-next-page="hasNextPage ? true : false"
+          :has-prev-page="hasPrevPage ? true : false"
+          :current-page="queryPage"
+          @prev="prevHandler"
+          @next="nextHandler"
+          class="mr-4"
+        ></paginate-component>
+        <span class="text-sm mt-2 md:mt-0"
+          >Caracters: {{ characterCount }}</span
+        >
       </div>
 
       <!-- Filters -->
-      <div class="flex items-baseline">
+      <div class="mt-6 md:mt-0 flex items-baseline">
         <label class="block mr-2" for="select_status"
           >Filter by status
           <p role="alert"></p>
@@ -75,8 +66,8 @@
 
     <!-- List -->
     <ul
-      v-if="characterList && characterList.length"
-      class="mt-8 grid gap-4 md:gap-8 grid-cols-2 md:grid-cols-3 xl:grid-cols-4"
+      v-if="characterList?.length > 0"
+      class="my-4 md:my-8 grid gap-4 md:gap-8 grid-cols-2 md:grid-cols-3 xl:grid-cols-4"
     >
       <li class="item" v-for="item in characterList" :key="item.id">
         <card-component
@@ -88,25 +79,38 @@
         ></card-component>
       </li>
     </ul>
-    <p v-else>Pas de résultats</p>
+    <div
+      v-else-if="characterList?.length === 0"
+      class="my-4 md:my-8 md:flex md:items-center"
+    >
+      <img
+        class="w-full mt-6 md:w-1/2 md:mr-8 md:mt-0"
+        src="@/assets/images/what.png"
+        alt=""
+      />
+      <p class="mt-4 flex-grow md:text-5xl md:mt-0">
+        There are no results for your search !
+      </p>
+    </div>
+    <p v-else><span>You shouldn't see this 😱</span></p>
 
     <!-- Paginate -->
-    <div v-if="characterList && characterList.length > 0" class="mt-4">
-      <div class="flex space-x-4 items-center">
-        <button class="btn btn--ghost" @click="prevHandler">
-          Previous page
-        </button>
-        <p class="text-sm">{{ queryPage }} / {{ pageCount }}</p>
-        <button class="btn btn--ghost" @click="nextHandler">Next page</button>
-        <p class="text-sm">Caracters: {{ characterCount }}</p>
-      </div>
-    </div>
+    <paginate-component
+      v-if="characterList && characterList.length"
+      :page-count="pageCount"
+      :has-next-page="hasNextPage ? true : false"
+      :has-prev-page="hasPrevPage ? true : false"
+      :current-page="queryPage"
+      @prev="prevHandler"
+      @next="nextHandler"
+    ></paginate-component>
   </div>
 </template>
 
 <script setup>
 import CardComponent from '../components/CardComponent.vue'
 import LoadingComponent from '../components/LoadingComponent.vue'
+import PaginateComponent from '../components/PaginateComponent.vue'
 
 import { useStore } from 'vuex'
 import { computed, watch } from 'vue'
@@ -118,7 +122,7 @@ const router = useRouter()
 
 const status = computed({
   get() {
-    return route.query.status
+    return route.query.status || 'all'
   },
   set(newValue) {
     if (newValue === 'all') {

@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 //import Home from '../views/HomeView.vue'
 import CharacterListView from '../views/CharacterListView.vue'
 import CharacterDetailView from '../views/CharacterDetailView.vue'
+import NotFoundView from '../views/NotFoundView.vue'
 
 const routes = [
   {
@@ -26,6 +27,7 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ '../views/AboutView.vue'),
   },
+  { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFoundView },
 ]
 
 const router = createRouter({

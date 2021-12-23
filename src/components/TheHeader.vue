@@ -1,6 +1,6 @@
 <template>
   <header class="absolute inset-x-0 z-10 the-header p-4">
-    <nav class="relative flex justify-between items-center p-4">
+    <nav class="relative flex justify-between items-center">
       <router-link
         class="z-10 backdrop-blur bg-black/20 rounded-full p-2"
         to="/"
