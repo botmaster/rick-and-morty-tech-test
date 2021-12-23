@@ -1,30 +1,22 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
-  <router-view />
+  <the-header></the-header>
+  <cover-component-vue title="Jellysmack Tech Test">
+    <img
+      class="inline-block mb-6"
+      src="@/assets/images/Rick_and_Morty_logo.png"
+      alt="Logo Rick and Morty"
+    />
+  </cover-component-vue>
+  <main class="flex-grow">
+    <router-view />
+  </main>
+  <the-footer></the-footer>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script setup>
+import TheHeader from './components/TheHeader.vue'
+import TheFooter from './components/TheFooter.vue'
+import CoverComponentVue from './components/CoverComponent.vue'
+</script>
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
-</style>
+<style lang="scss"></style>

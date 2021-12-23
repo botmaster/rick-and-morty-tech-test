@@ -1,0 +1,18 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  @apply bg-green-100;
+}
+
+// Links
+a:not(.btn) {
+  @apply text-pink-700 underline decoration-pink;
+
+  &:hover,
+  &:focus {
+    @apply text-pink-700 decoration-pink-700;
+  }
+}
