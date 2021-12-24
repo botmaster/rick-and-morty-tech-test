@@ -3,8 +3,14 @@
     class="cover relative flex items-center justify-center bg-body-backgrounddark"
   >
     <img
-      class="absolute inset-0 object-cover w-full h-full opacity-40"
-      src="@/assets/images/Rick-and-Morty.jpg"
+      class="absolute inset-0 object-cover w-full h-full opacity-70"
+      sizes="(max-width: 1920px) 100vw, 1920px"
+      srcset="
+        @/assets/images/cover-background-600.jpg   600w,
+        @/assets/images/cover-background-1530.jpg 1530w,
+        @/assets/images/cover-background-1920.jpg 1920w
+      "
+      src="@/assets/images/cover-background-1920.jpg"
       alt=""
     />
     <div class="relative container mx-auto text-center">
