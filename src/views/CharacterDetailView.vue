@@ -1,6 +1,7 @@
 <template>
   <div class="container py-6 md:py-12">
-    <div class="mb-4 md:mb-12 flex items-center">
+    <h1>Character infos</h1>
+    <div class="mt-6 mb-6 md:mb-12 flex items-center">
       <a href="#" @click.prevent="router.go(-1)" class="btn btn--ghost">Back</a>
       <loading-component
         class="ml-6 text-4xl"
@@ -11,7 +12,7 @@
       <div class="md:flex max-w-7xl">
         <img
           v-show="character?.image"
-          class="w-64 h-64 mx-auto rounded-full md:rounded-lg md:w-[300px] md:h-[300px] mb-12 md:mr-10 shadow shadow-green-800/20"
+          class="w-64 h-64 mx-auto rounded-full md:rounded-lg md:w-[300px] md:h-[300px] mb-12 md:mr-10 md:mb-0 shadow shadow-green-800/20"
           width="300"
           height="300"
           :src="character.image"
