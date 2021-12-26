@@ -2,16 +2,14 @@ import { createStore } from 'vuex'
 import { createLogger } from 'vuex'
 
 // Modules
-import episodesModule from './modules/episodes.module'
-import charactereModule from './modules/charactere.module'
+import characterModule from './modules/character.module'
 
 export default createStore({
   state: {},
   mutations: {},
   actions: {},
   modules: {
-    episodesModule,
-    charactereModule,
+    characterModule,
   },
   plugins: process.env.NODE_ENV !== 'production' ? [createLogger()] : [],
 })
