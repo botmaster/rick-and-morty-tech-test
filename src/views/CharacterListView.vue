@@ -200,7 +200,6 @@ const searchSubmitHandler = () => {
 }
 
 const fetchData = (query) => {
-  console.log('fetchData query', query)
   store.dispatch('charactereModule/fetchCharacterList', {
     ...query,
   })
