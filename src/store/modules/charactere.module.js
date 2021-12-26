@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { api } from '../../config/api.js'
 
 export default {
   namespaced: true,
@@ -50,14 +51,15 @@ export default {
     fetchCharacterList({ commit }, { page, name, status }) {
       commit('REQUEST_CHARACTER_LIST')
       axios
-        .get('https://rickandmortyapi.com/api/character/', {
+        .get(`/character/`, {
           params: { page, name, status },
+          baseURL: api.apiUri,
         })
         .then((response) => {
           commit('RECIEVE_CHARACTER_LIST_SUCCESS', response.data)
         })
         .catch((error) => {
-          console.error(error)
+          // console.error(error)
           commit('RECIEVE_CHARACTER_LIST_FAILED', error)
         })
     },
@@ -65,12 +67,14 @@ export default {
     fetchCharacterById({ commit }, { id } = 1) {
       commit('REQUEST_CHARACTER')
       axios
-        .get(`https://rickandmortyapi.com/api/character/${id}`)
+        .get(`/character/${id}`, {
+          baseURL: api.apiUri,
+        })
         .then((response) => {
           commit('RECIEVE_CHARACTER_SUCCESS', response.data)
         })
         .catch((error) => {
-          console.error(error)
+          // console.error(error)
           commit('RECIEVE_CHARACTER_FAILED', error)
         })
     },
