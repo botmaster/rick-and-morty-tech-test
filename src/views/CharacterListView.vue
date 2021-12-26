@@ -43,7 +43,7 @@
           class="mr-4"
         ></paginate-component>
         <span class="text-sm mt-2 md:mt-0"
-          ><span v-if="this.search">"{{ this.search }}" - </span>
+          ><span v-if="search">"{{ search }}" - </span>
           {{ characterCount }} hits</span
         >
       </div>
