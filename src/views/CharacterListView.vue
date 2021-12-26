@@ -170,17 +170,13 @@ const queryPage = computed(() =>
 )
 
 const characterCount = computed(
-  () => store.getters['charactereModule/characterCount']
+  () => store.getters['characterModule/characterCount']
 )
-const pageCount = computed(() => store.getters['charactereModule/pageCount'])
-const hasNextPage = computed(
-  () => store.getters['charactereModule/hasNextPage']
-)
-const hasPrevPage = computed(
-  () => store.getters['charactereModule/hasPrevPage']
-)
-const characterList = computed(() => store.state.charactereModule.characterList)
-const isLoading = computed(() => store.state.charactereModule.isLoading)
+const pageCount = computed(() => store.getters['characterModule/pageCount'])
+const hasNextPage = computed(() => store.getters['characterModule/hasNextPage'])
+const hasPrevPage = computed(() => store.getters['characterModule/hasPrevPage'])
+const characterList = computed(() => store.state.characterModule.characterList)
+const isLoading = computed(() => store.state.characterModule.isLoading)
 
 const nextHandler = () => {
   router.push({
@@ -204,7 +200,7 @@ const searchSubmitHandler = () => {
 }
 
 const fetchData = (query) => {
-  store.dispatch('charactereModule/fetchCharacterList', {
+  store.dispatch('characterModule/fetchCharacterList', {
     ...query,
   })
 }
