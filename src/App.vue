@@ -5,6 +5,8 @@
       class="inline-block mb-6"
       src="@/assets/images/Rick_and_Morty_logo.png"
       alt="Logo Rick and Morty"
+      width="622"
+      height="202"
     />
   </cover-component-vue>
   <main class="flex-grow">
