@@ -16,11 +16,14 @@
         </label>
         <input
           id="input_search"
-          class="rounded border py-2 px-2 text-sm md:w-64"
+          class="rounded border mr-4 py-2 px-2 text-sm md:w-64"
           type="text"
           v-model.lazy.trim="search"
         />
-        <button type="submit" class="btn btn--primary ml-4">Search</button>
+        <button type="submit" class="btn btn--primary mr-4">Search</button>
+        <a v-if="search" href="#" type="button" @click.prevent="search = null"
+          >Clear search</a
+        >
       </div>
     </form>
 
@@ -40,7 +43,8 @@
           class="mr-4"
         ></paginate-component>
         <span class="text-sm mt-2 md:mt-0"
-          >Caracters: {{ characterCount }}</span
+          ><span v-if="this.search">"{{ this.search }}" - </span>
+          {{ characterCount }} hits</span
         >
       </div>
 
