@@ -71,7 +71,7 @@
     <!-- List -->
     <ul
       v-if="characterList?.length > 0"
-      class="my-4 md:my-8 grid gap-4 md:gap-8 grid-cols-2 md:grid-cols-3 xl:grid-cols-4"
+      class="my-4 md:my-8 grid gap-4 md:gap-8 grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
     >
       <li class="item" v-for="item in characterList" :key="item.id">
         <card-component
