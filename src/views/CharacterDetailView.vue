@@ -73,20 +73,20 @@ const router = useRouter()
 
 // eslint-disable-next-line no-unused-vars
 const character = computed(
-  () => store.getters['charactereModule/currentCharacter']
+  () => store.getters['characterModule/currentCharacter']
 )
 const episodesCount = computed(() => character?.value?.episode?.length || 'Na')
 const created = computed(() => {
   return new Date(character?.value.created)?.toLocaleDateString('fe-FE') || 'Na'
 })
-const isLoading = computed(() => store.state.charactereModule.isLoading)
+const isLoading = computed(() => store.state.characterModule.isLoading)
 
 const formatValue = (value) => {
   const str = String(value).trim()
   return str || str !== '' ? value : 'Na'
 }
 
-store.dispatch('charactereModule/fetchCharacterById', { id: route.params.id })
+store.dispatch('characterModule/fetchCharacterById', { id: route.params.id })
 </script>
 
 <style lang="scss" scoped>
