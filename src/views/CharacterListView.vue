@@ -73,7 +73,12 @@
       v-if="characterList?.length > 0"
       class="my-4 md:my-8 grid gap-4 md:gap-8 grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
     >
-      <li class="item" v-for="item in characterList" :key="item.id">
+      <li
+        class="item"
+        v-for="(item, index) in characterList"
+        :key="item.id"
+        :style="`animation-delay: ${40 * index}ms`"
+      >
         <card-component
           :name="item.name"
           :id="item.id"
@@ -216,4 +221,17 @@ watch(
   { immediate: true }
 )
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.item {
+  opacity: 0;
+  transform: scale(0.95);
+  animation: fade-in 300ms ease forwards;
+}
+
+@keyframes fade-in {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+</style>
