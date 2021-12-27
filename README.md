@@ -34,6 +34,18 @@ https://rick-and-morty-jellysmack.netlify.app/
 
 ## Project setup
 
+### Node version
+
+Node version: lts/fermium (v14 LTS)
+
+If you use a node version manager like nvm
+
+```
+nvm use
+```
+
+### Install node dependencies
+
 ```
 yarn install
 ```
